@@ -32,7 +32,7 @@ function bubbleSort(arr)
             }
         }
     }
-    return arr;
+    return arr;// we dont need toreturn the array here because it is passed py reference
 }
 /*
 // to test
@@ -115,7 +115,37 @@ if (x != -1)
 
 //------------------
 //binary search
-
+function binarySearch(arr, target)
+{
+    let start = 0;
+    let end = arr.length - 1;
+    while (start <= end)
+    {
+        let midpoint = math.floor((start + end) / 2);
+        if (arr[midpoint] == target)
+        {
+            return midpoint;
+        }
+        if (arr[midpoint] > target)
+        {
+            start = midpoint + 1;
+        }
+        if (arr[midpoint] < target)
+        {
+            end = midpoint - 1;
+        }
+    }
+    return -1; 
+}
+let y = binarySearch(3, numbers);
+if (y != -1)
+{
+    console.log("found at" + y);
+}
+else
+{
+    console.log("not found");
+}
 
 
 
