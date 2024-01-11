@@ -97,7 +97,7 @@ function max(a, b, c)
 }
 console.log(max(1,2,3));
 // or using the arguments object
-function maxx(a, b, c)
+function maxx(a, b, c) //or (...arguments)  treat an indefinite number of arguments as an array
 {
     let max = arguments[0];
     for (let i = 1; i < 3; i++) // or i < arguments.length
