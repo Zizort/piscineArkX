@@ -4,7 +4,7 @@ const l = books.length;
 //books is an array of objects
 function priceOfBook(bookName) {
   // write your code here
-  console.log(books[0].id);
+  // console.log(books[0].id);
   for (let i = 0; i < l; i++)
   {
     if (books[i].title == bookName)
@@ -48,45 +48,51 @@ function findBookByGenre(genre) {
 
 function groupByGenre() {
   // write your code here
-  // not yet completed
-  let genresObj = {genre: "", book: []};
-  const arr = []; // array of genres
-  const groups = []; // array of objects
-  for (let i = 0; i < l; i++)
-  {
-    for (let j = 0, n = books[i].genres.length; j < n; j++)
-    {
-      if (search(arr, books[i].genres[j]) == false || arr.length == 0)
-      {
-        arr.push(books[i].genres[j]);
-      }
-    }
-  } 
-  //loop
-  genresObj.genre = arr[i];//books[i].genres[j];
-  genresObj.book = findBookByGenre(arr[i]);
-          groups.push(genresObj.genre);
+   // Create an object to store books grouped by genre
+   const groupedBooks = {};
+
+   // Iterate through each book in the array
+   for (let i = 0; i < books.length; i++) {
+     // Iterate through each genre of the current book
+     for (let j = 0; j < books[i].genres.length; j++) {
+       const genre = books[i].genres[j];
+ 
+       // Check if the genre is already a key in the groupedBooks object
+       if (groupedBooks[genre]) {
+         // If yes, push the current book to the existing array
+         groupedBooks[genre].push(books[i]);
+       } else {
+         // If no, create a new array with the current book
+         groupedBooks[genre] = [books[i]];
+       }
+     }
+   }
+ 
+   // Return the object containing books grouped by genre
+   return groupedBooks; 
+ 
 }
 
 function sortBooksByPrice() {
-  // write your code here  
+  // write your code here 
+  const sortedBooks = JSON.parse(JSON.stringify(books)); 
   let x = -1;
-  let temparr = [];
+  let temparr;
   while (x != 0)
   {
     x = 0;
     for (let i = 0; i < l - 1; i++)
     {
-      if (books[i].price < books[i + 1].price) // switch to > to sort from small to big
+      if (sortedBooks[i].price > sortedBooks[i + 1].price) // switch to > to sort from small to big
       {
-        temparr[0] = books[i];
-        books[i] = books[i + 1];
-        books[i + 1] = temparr[0];
+        temparr = sortedBooks[i];
+        sortedBooks[i] = sortedBooks[i + 1];
+        sortedBooks[i + 1] = temparr;
         x++;
       }
     }
   }
-
+ return sortedBooks;
 }
 
 (function main() {
