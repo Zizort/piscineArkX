@@ -48,7 +48,7 @@ function findBookByGenre(genre) {
 
 function groupByGenre() {
   // write your code here
-  /*
+  // not yet completed
   let genresObj = {genre: "", book: []};
   const arr = []; // array of genres
   const groups = []; // array of objects
