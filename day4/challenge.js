@@ -58,7 +58,7 @@ function groupByGenre() {
        const genre = books[i].genres[j];
  
        // Check if the genre is already a key in the groupedBooks object
-       if (groupedBooks[genre]) {
+       if (groupedBooks[genre]) { // same as groupedBooks.genre 
          // If yes, push the current book to the existing array
          groupedBooks[genre].push(books[i]);
        } else {
@@ -67,11 +67,11 @@ function groupByGenre() {
        }
      }
    }
- 
    // Return the object containing books grouped by genre
    return groupedBooks; 
  
 }
+// console.log(groupByGenre());
 
 function sortBooksByPrice() {
   // write your code here 

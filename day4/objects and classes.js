@@ -9,12 +9,13 @@ const Person = {
     set fullName(name)
     {
         //split a string into first and last
-        const parts = value.split(' ');
+        const parts = name.split(' ');
         this.firstname = parts[0];
         this.lastname = parts[1];
     }
 };
-console.log(Person.fullName)
+Person.fullName = "aziz mouk"; // set the values of the  2 keys
+console.log(Person.fullName); // get the values of the 2 keys separated by space
 
 //********************************** */
 //task 2:
@@ -47,11 +48,41 @@ p3 = new person("Lily", 24);
 console.log(p1.compareAge(p2));
 /************************************************** */
 //task 3
-function mostOccurred()
+// using objects
+// another array can be used instead of an object
+let array = [1, 2, 2, 3, 3, 4, 1, 2];
+function mostOccurred(arr)
 {
-
+    const l = arr.length;
+    const object = {};
+    for (let i = 0; i < l - 1; i++)
+    {
+        // const indice = i;
+        object[`entry${i}`] = 1; // object.'entry${i}' does not work
+        // console.log(object);
+        for (let j = i + 1; j < l; j++)
+        {
+            if (arr[i] == arr[j])
+            {
+                object[`entry${i}`]++;
+            }
+        }
+    }
+    // console.log(object.entry0); this syntax works
+    let max = 1;
+    let pos = 0;
+    for (let x = 0; x < l - 1; x++)
+    {
+        if (object[`entry${x}`] > max)
+        {
+            max = object[`entry${x}`];
+            pos = x;
+        }
+    }
+    // return the element most occurred 
+    return arr[pos];
 }
-
+console.log(mostOccurred(array));
 
 
 
