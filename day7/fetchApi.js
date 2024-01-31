@@ -26,11 +26,10 @@ function summarizeAge(arr) {
       }, 0);
 }
 function processUserData(users) {
+
     const filtered = users.filter((e)=>e.gender === 'male');
     const arr = [];
     filtered.map(({firstName, age}) => arr.push({firstName, age}));
-    // addition of all ages
-
     return arr;
 /* another way
     const filtered = users.filter((e)=>e.gender === 'male');
