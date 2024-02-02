@@ -4,11 +4,27 @@
 const fetchUserData = async () => {
     try {
         const response = await fetch("https://dummyjson.com/users");
-        const facts = await response.json();
+        const {users} = await response.json();
         //console.log(facts.users);
-        const filtered = processUserData(facts.users);
-        console.log(filtered);
-        console.log("Total Age of Active Users: " + summarizeAge(filtered));
+/*
+        
+        const filteredString = processUserData(users);
+        
+*/
+        const arr = processUserData(users);
+        console.log("Processed Users:");
+        console.log(arr[0]);
+        //console.log(arr[1]);
+        console.log("Total Age of Active Users: " + arr[1]);
+
+        //console.log(filtered);
+        // let n = filtered.length;
+        // const {firstName, age} = filtered;
+        // for (let i = 0; i < n; i++)
+        // {
+        //     console.log("- Name: " + {firstName} + ", Age: " + filtered[i].age);
+        // }
+        //console.log("Total Age of Active Users: " + summarizeAge(filtered));
 
 
         //const output = facts.filter(person => person.gender === "male");
@@ -22,15 +38,18 @@ const fetchUserData = async () => {
 fetchUserData();
 function summarizeAge(arr) {
     return arr.reduce((accumulator ,item) => {
-        return accumulator += item.age;
+        return accumulator += item;
       }, 0);
 }
+//let ages = 0;
 function processUserData(users) {
 
     const filtered = users.filter((e)=>e.gender === 'male');
-    const arr = [];
-    filtered.map(({firstName, age}) => arr.push({firstName, age}));
-    return arr;
+    const filteredFormat = filtered.map((ele) => "- Name: " + ele.firstName + " " + ele.lastName + ", age: " + ele.age) 
+    const filteredAge = filtered.map((ele) => ele.age);
+    const filteredString= filteredFormat.join("\n");
+    //console.log(filteredAge);
+    return [filteredString, summarizeAge(filteredAge)]; // string
 /* another way
     const filtered = users.filter((e)=>e.gender === 'male');
     const arr = [];
