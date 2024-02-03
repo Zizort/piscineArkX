@@ -1,23 +1,4 @@
-//MODULES and asynchronouns (callbacks/ promises) and error handeling
-/*const fs = require('node:fs/promises');
-
-function readFileAsync(filePath)
-{
-    fs.readFile(filePath, "utf-8")
-    .then(function(result) 
-        {
-            console.log(result);
-        })
-    .catch(function(error)
-    {
-        console.log("not found");
-        else
-        {
-            console.log(error);
-        //}
-    })    
-}
-*/
+//MODULES and asynchronouns (callbacks/ promises) and error handling
 
 module.exports = { readFileAsync, writeFileAsync, processFiles}
 // read a file
@@ -40,19 +21,18 @@ function readFileAsync(path)
         })     
     })
 }
-console.log("hello");
-
-readFileAsync("./day6/test.txt")
+//console.log("2");
+/*
+readFileAsync("./day6/firstfunc.txt")
 .then(function(value){console.log(value);})
 .catch(function(error)
 {
     console.log(error);
 });
-
-console.log("3");
+*/
+//console.log("3");
 
 //write file
-//let data = "hooooooooooooo";
 function writeFileAsync(path, data)
 {
     return new Promise(function(resolve, reject)
@@ -70,47 +50,22 @@ function writeFileAsync(path, data)
         })     
     })
 }
-writeFileAsync("./day6/test.txt", "hooooooooooo")
+/*
+writeFileAsync("./day6/secondfunc.txt", "hooooooooooo")
 .then(function(value){
     console.log(value);
 })
 .catch(function(err){
     console.log(err);
 });
-
-//processFiles
-/*
-function processFiles(path1, path2, path3)
+readFileAsync("./day6/secondfunc.txt")
+.then(function(value){console.log(value);})
+.catch(function(error)
 {
-    const arr = [path1, path2, path3];
-    return new Promise(function(resolve, reject)
-    {
-        for (let i = 0; i < 3; i++)
-        {
-            fs.readFile(arr[i], "utf8", function(err, value)
-            {
-                if (err)
-                {
-                    reject("error");
-                }
-                else
-                {
-                    resolve(value);
-                }
-            })
-            fs.appendFile(arr[i], "\n hello", function(err){
-                if (err){
-                    reject(err);
-                }
-                else
-                {
-                    resolve("appended");
-                }
-            })
-        }     
-    })
-}
+    console.log(error);
+});
 */
+//processFiles
 
 function processFiles(path1, path2, path3)
 {
@@ -118,12 +73,14 @@ function processFiles(path1, path2, path3)
     for (let i = 0; i < 3; i++) {
         const fileOps = async function () {
             try {
-                await fspromise.writeFile(arr[i], "\n hello");
-                await fspromise.appendFile(arr[i], "\n and you");
+                // console.log("file " + (i + 1) + ":");
+                await fspromise.writeFile(arr[i], "hello");
+                await fspromise.appendFile(arr[i], "\nhi");
                 const data = await fspromise.readFile(arr[i], 'utf8');
-                console.log(data);
-                await fspromise.appendFile(arr[i]+ i, "\n and you");
-
+                console.log("file " + (i + 1) + ":\n" + data);
+                await fspromise.appendFile(arr[i]+ i, "\nhello number 2");
+                const data2 = await fspromise.readFile(arr[i]+ i, 'utf8');
+                console.log("file " + i + ":\n" + data2);
             } catch (err) {
                 console.error(err);
             }
@@ -131,11 +88,4 @@ function processFiles(path1, path2, path3)
         fileOps();
     }    
 } 
-processFiles("./day6/test.txt","./day6/test1.txt","./day6/test2.txt");
-/*.then(function(value){
-    console.log(value);
-})
-.catch(function(err){
-    console.log(err);
-});*/
-
+//processFiles("./day6/test.txt","./day6/test1.txt","./day6/test2.txt");
