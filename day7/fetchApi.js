@@ -4,17 +4,13 @@
 const fetchUserData = async () => {
     try {
         const response = await fetch("https://dummyjson.com/users");
+        //instead of const variable;
+        //processUserData(variable.users);
         const {users} = await response.json();
-        //console.log(facts.users);
-/*
-        
-        const filteredString = processUserData(users);
-        
-*/
         const arr = processUserData(users);
         console.log("Processed Users:");
+        //male users
         console.log(arr[0]);
-        //console.log(arr[1]);
         console.log("Total Age of Active Users: " + arr[1]);
 
         //console.log(filtered);
@@ -26,7 +22,6 @@ const fetchUserData = async () => {
         // }
         //console.log("Total Age of Active Users: " + summarizeAge(filtered));
 
-
         //const output = facts.filter(person => person.gender === "male");
         //console.log(output);
     }
@@ -36,20 +31,23 @@ const fetchUserData = async () => {
 }
 
 fetchUserData();
+
 function summarizeAge(arr) {
     return arr.reduce((accumulator ,item) => {
         return accumulator += item;
       }, 0);
 }
-//let ages = 0;
+
 function processUserData(users) {
 
     const filtered = users.filter((e)=>e.gender === 'male');
     const filteredFormat = filtered.map((ele) => "- Name: " + ele.firstName + " " + ele.lastName + ", age: " + ele.age) 
-    const filteredAge = filtered.map((ele) => ele.age);
+    //instead of filtered.map((ele) => ele.age); we use destructuring
+    const filteredAge = filtered.map(({age} = filtered) => age);
     const filteredString= filteredFormat.join("\n");
     //console.log(filteredAge);
     return [filteredString, summarizeAge(filteredAge)]; // string
+}    
 /* another way
     const filtered = users.filter((e)=>e.gender === 'male');
     const arr = [];
@@ -79,5 +77,4 @@ const output = _.flow([
   ])(users);
   return output;
   */
-}
 
