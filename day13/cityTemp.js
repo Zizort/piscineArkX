@@ -20,6 +20,7 @@ const cities = [
 async function main() {
     try {
         const city = selectRandomCity(cities);
+        //fetch the data related to the city lat and lng values
         const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lng}&current_weather=true`);
         const data = await response.json();
         console.log(city.name + ' ' + data.current_weather.temperature + data.current_weather_units.temperature);
