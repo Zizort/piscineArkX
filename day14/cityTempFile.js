@@ -76,7 +76,7 @@ async function main() {
         const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${foundCity.lat}&longitude=${foundCity.lng}&current_weather=true`);
         const data = await response.json();
         if (fs.existsSync('./cityname.txt'))//
-        await deleteFile('./cityname.txt');//
+        await deleteFile('./cityname.txt');// or just overwrite it
         await newwriteFile('./cityname.txt', foundCity.name + ' ' + data.current_weather.temperature + data.current_weather_units.temperature);
         const x = await readf('./cityname.txt');
         console.log(x);
