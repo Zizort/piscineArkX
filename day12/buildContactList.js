@@ -129,7 +129,7 @@ async function main(){
     while (true) {
         //the whole menu (add) (view) (search) (exit)
         const response = await prompt("CONTACT LIST:\n1-add a contact\n2-view all contacts\n3-search for a contact\n4-exit\n");
-        let v = response;//.toLowerCase();
+        let v = response.trim().toLowerCase();
         switch (v) {
             case "add":
                 let Name = await prompt("name:\n");
