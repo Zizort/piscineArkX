@@ -66,7 +66,8 @@ const server = http.createServer((req, res) => {
 
 async function main(name, res) {
     try {
-        let foundCity = cities.find(object => object.name == name);
+        let nameFormatted = name.split(" ").join("").toLowerCase();
+        let foundCity = cities.find(object => object.name.split(" ").join("").toLowerCase() == nameFormatted);
         //fetch the data related to the city lat and lng values
         if (foundCity) {
             const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${foundCity.lat}&longitude=${foundCity.lng}&current_weather=true`);
