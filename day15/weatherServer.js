@@ -22,7 +22,7 @@ const server = http.createServer((req, res) => {
     const query = parsedUrl.query;
     // Inside the request handler
     // deponds on the URL
-    if (path === '/weather') {
+    if (path === '/weather' && query.city) {
     // Handle the '/users' endpoint
         res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });// the type of content to write;
         //; charset=utf-8' to fix the 'A' in the output
@@ -58,6 +58,7 @@ const server = http.createServer((req, res) => {
         //res.write(citytemp); 
      } else {
      //Handle unknown endpoints
+     res.writeHead(404);
      res.write("nothing here go to: /weather?city=nameOfCity");
      res.end();
     }
@@ -66,8 +67,9 @@ const server = http.createServer((req, res) => {
 
 async function main(name, res) {
     try {
-        let nameFormatted = name.split(" ").join("").toLowerCase();
-        let foundCity = cities.find(object => object.name.split(" ").join("").toLowerCase() == nameFormatted);
+            let nameFormatted = name.split(" ").join("").toLowerCase();
+            let foundCity = cities.find(object => object.name.split(" ").join("").toLowerCase() == nameFormatted);
+        
         //fetch the data related to the city lat and lng values
         if (foundCity) {
             const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${foundCity.lat}&longitude=${foundCity.lng}&current_weather=true`);
@@ -85,9 +87,11 @@ async function main(name, res) {
         //maybe change the res.writehead();
         if (typeof err === 'string')
         {
+            res.writeHead(404);
           res.write(err);
         }
         else {
+            res.writeHead(500);
             res.write(err.message);
         }
         res.end();
