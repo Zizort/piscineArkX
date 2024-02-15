@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-//have to use post man to send different other than get
-// the browser has only get as a default
-// wecan use get to everything but it does not have req.body
+
+//still missing error handeling
 let products = [
     { id: 1, name: 'iPhone 12 Pro', price: 1099.99 },
     { id: 2, name: 'Samsung Galaxy S21', price: 999.99 },
@@ -11,28 +10,11 @@ let products = [
     { id: 4, name: 'MacBook Pro 16', price: 2399.99 },
     { id: 5, name: 'DJI Mavic Air 2', price: 799.99 },
 ];
-// let y = products[products.length - 1].id;
-
-// let newUser = {id: y, name: data.name, price: data.price};
-//     products.push(newUser);
-//     console.log(products);
-
 // For parsing application/json
 app.use(express.json());
  
 // For parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-
-// implicit returns?
-// let arr = products.filter((ele) => { return ele.price ==999.99 }); //only works with return
-// console.log(arr);
-// let arr = products.filter((ele) => ele.price == 999.99);
-// console.log(arr);
-//console.log(products.map((x) => `id: ${x.id}, name: ${x.name}, price: ${x.price}`).join("\n"));
-//join ("\n") does not work on browser
-//where is error handeling?
-
-//what is the point of get /post put keywords if we re going to build the entire logic behind them?
 
 
 
