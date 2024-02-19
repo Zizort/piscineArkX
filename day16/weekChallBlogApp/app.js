@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const blogs = require("./blogs.json");
+const fs = require("fs");
 //modules
-function newwriteFile(path, data) {
+function writeFile(path, data) {
     return new Promise((resolve, reject) => { 
         fs.writeFile(path, data, (err) => {
         if (err) {
@@ -106,32 +107,36 @@ app.get('/blogs/:id', (req, res, next) => {
 
 
 //postman
-app.post('/blogs', (req, res, next) => {
+app.post('/blogs', async (req, res, next) => {
     try {
         const data = req.body;
-        let newBlog = {id: products[products.length - 1].id + 1, text: "hello nice to meet you!"};
+        let newBlog = {id: blogs[blogs.length - 1].id + 1, text: data.text};
         blogs.push(newBlog);
         //write this into the file
-        
+        await writeFile("./blogs.json", JSON.stringify(blogs));
+        res.json({message: "succesful posting"});
+
     } catch(error) {
         next(error);
     }
 });
 
-app.put('/blogs/:id', (req, res, next) => {
+app.put('/blogs/:id', async (req, res, next) => {
     try {
         let ID = req.params.id;
         //let j = 0
-        let wanted = products.find((ele) => { return ele.id == ID});//or just index of() if its -1 it oes not exist
+        let wanted = blogs.find((ele) => { return ele.id == ID});//or just index of() if its -1 it oes not exist
         if (wanted) {
-            let i = products.indexOf(wanted);
+            let i = blogs.indexOf(wanted);
             const data = req.body; //if data contains the whole object
             // products[wanted] = data; //this does not work //using the object as an index in array of objects
-            if (data.name)
-                products[i].name = data.name; 
-            if (data.price)
-                products[i].price = data.price;
+            if (data.text)
+                blogs[i].text = data.text; 
             //or let newprocucts = {...  ,...req.body};
+            //write it to file
+            //overwrite it with the new data
+            await writeFile("./blogs.json", JSON.stringify(blogs));
+            res.json({message: "modification succesful"});
             res.json(products);
         } else {
             // res.status(400).send("not found");
@@ -144,20 +149,23 @@ app.put('/blogs/:id', (req, res, next) => {
     }    
 });
 
-app.delete('/blogs/:id', (req, res, next) => {
+app.delete('/blogs/:id', async (req, res, next) => {
     try {
         let ID = parseInt(req.params.id);
         //let j = 0
-        let wanted = products.find((ele) => { return ele.id == ID});//j++; 
+        let wanted = blogs.find((ele) => { return ele.id == ID});//j++; 
         if (wanted) {
-            let i = products.indexOf(wanted);//you cant compare objects / this works
+            let i = blogs.indexOf(wanted);//you cant compare objects / this works
             //const data = req.body;
-            products.splice(i, 1);
-            console.log(products);
-            res.json(products);
+            blogs.splice(i, 1);
+            //write it to file
+            await writeFile("./blogs.json", JSON.stringify(blogs));
+            res.json({message: "deletion succesful"});
+            // console.log(products);
+            res.json(blogs);
         } else {
             //res.status(400).send("not found");
-            const error = new Error("nothing");
+            const error = new Error("nothing to delete");
             error.status = 400;
             next(error);
         }
