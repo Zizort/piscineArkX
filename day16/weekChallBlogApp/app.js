@@ -1,41 +1,35 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const postModel = require('./models/post.js');
 const blogs = require("./blogs.json");
-const fs = require("fs");
+//const fs = require("fs");
 //modules
-function writeFile(path, data) {
-    return new Promise((resolve, reject) => { 
-        fs.writeFile(path, data, (err) => {
-        if (err) {
-            reject(err);//console.error("")
-        } else {
-            resolve('File created successfully.');
-        }});
-    });
-}
+// function writeFile(path, data) {
+//     return new Promise((resolve, reject) => { 
+//         fs.writeFile(path, data, (err) => {
+//         if (err) {
+//             reject(err);//console.error("")
+//         } else {
+//             resolve('File created successfully.');
+//         }});
+//     });
+// }
 
-function readf(path) {
-    return new Promise((resolve, reject) => {
-        fs.readFile(path, 'utf8', (err, data) => {
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve(data);
-            }
-        });
-    });
+// function readf(path) {
+//     return new Promise((resolve, reject) => {
+//         fs.readFile(path, 'utf8', (err, data) => {
+//             if (err) {
+//                 reject(err);
+//             }
+//             else {
+//                 resolve(data);
+//             }
+//         });
+//     });
 
-}
-// //still missing error handeling
-// let products = [
-//     { id: 1, name: 'iPhone 12 Pro', price: 1099.99 },
-//     { id: 2, name: 'Samsung Galaxy S21', price: 999.99 },
-//     { id: 3, name: 'Sony PlayStation 5', price: 499.99 },
-//     { id: 4, name: 'MacBook Pro 16', price: 2399.99 },
-//     { id: 5, name: 'DJI Mavic Air 2', price: 799.99 },
-// ];
+// }
+
 // For parsing application/json
 app.use(express.json());
  
@@ -113,7 +107,7 @@ app.post('/blogs', async (req, res, next) => {
         let newBlog = {id: blogs[blogs.length - 1].id + 1, text: data.text};
         blogs.push(newBlog);
         //write this into the file
-        await writeFile("./blogs.json", JSON.stringify(blogs));
+        await postModel.writeFile("./blogs.json", JSON.stringify(blogs));
         res.json({message: "succesful posting"});
 
     } catch(error) {
@@ -135,9 +129,9 @@ app.put('/blogs/:id', async (req, res, next) => {
             //or let newprocucts = {...  ,...req.body};
             //write it to file
             //overwrite it with the new data
-            await writeFile("./blogs.json", JSON.stringify(blogs));
+            await postModel.writeFile("./blogs.json", JSON.stringify(blogs));
             res.json({message: "modification succesful"});
-            res.json(products);
+            //res.json(products);
         } else {
             // res.status(400).send("not found");
             const error = new Error("products not found for updating");
@@ -159,10 +153,10 @@ app.delete('/blogs/:id', async (req, res, next) => {
             //const data = req.body;
             blogs.splice(i, 1);
             //write it to file
-            await writeFile("./blogs.json", JSON.stringify(blogs));
+            await postModel.writeFile("./blogs.json", JSON.stringify(blogs));
             res.json({message: "deletion succesful"});
             // console.log(products);
-            res.json(blogs);
+            //res.json(blogs);
         } else {
             //res.status(400).send("not found");
             const error = new Error("nothing to delete");
@@ -177,7 +171,7 @@ app.delete('/blogs/:id', async (req, res, next) => {
 app.use((error, req, res, next) => {
     
     console.log(error);
-    res.status(error.status).send(error.message);
+    res.status(error.status).json({error: error.message});
     
 })
 app.use((req, res) => {
