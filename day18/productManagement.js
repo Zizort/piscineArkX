@@ -97,7 +97,7 @@ app.put('/products/:id', (req, res, next) => {
     try {
         let ID = req.params.id;
         //let j = 0
-        let wanted = products.find((ele) => { return ele.id == ID});//j++; 
+        let wanted = products.find((ele) => { return ele.id == ID});//or just index of() if its -1 it oes not exist
         if (wanted) {
             let i = products.indexOf(wanted);
             const data = req.body; //if data contains the whole object
@@ -106,6 +106,7 @@ app.put('/products/:id', (req, res, next) => {
                 products[i].name = data.name; 
             if (data.price)
                 products[i].price = data.price;
+            //or let newprocucts = {...  ,...req.body}
             res.json(products);
         } else {
             // res.status(400).send("not found");
@@ -118,7 +119,7 @@ app.put('/products/:id', (req, res, next) => {
     }    
 });
 
-app.delete('/products/:id', (req, res) => {
+app.delete('/products/:id', (req, res, next) => {
     try {
         let ID = parseInt(req.params.id);
         //let j = 0
