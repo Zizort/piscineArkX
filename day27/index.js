@@ -11,7 +11,7 @@ async function fetchUsers() {
         return users;
     } catch(err) {
         //console.log(err.message);
-        return err.message;
+        throw err;
     }
 }
 async function findbyNameEmail(Name, Email) {
@@ -21,7 +21,7 @@ async function findbyNameEmail(Name, Email) {
          return user; // this works
     } catch (err) {
         //console.log(err.message);
-        return err.message;
+        throw err;
     }
 }
 //update email by given name
@@ -39,7 +39,7 @@ async function updateEmail(Name, updatedEmail) {
 
     } catch (err) {
         //console.log(err);
-        return err.message;
+        throw err;
     }
 }
 async function deleteDate(days) {
