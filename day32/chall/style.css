@@ -80,9 +80,15 @@ footer [data-mingion] {
 footer {
     background-color: brown;
 }
-footer li.red ~ li:hover {
+/* footer li.red ~ li:hover {
     background-color: blueviolet;
-}
+} */
+ footer ul:first-of-type :nth-child(2n):hover{
+    background-color: blue;
+} 
+ footer ul:first-of-type :nth-child(2n -1):hover{
+    background-color: rgb(230, 37, 197);
+} 
 
 .Hero a:nth-child(3) {
     background-color: black;
