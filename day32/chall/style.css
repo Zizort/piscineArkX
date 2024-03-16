@@ -1,0 +1,94 @@
+body {
+    background-color: lightgrey;
+    color: darkcyan;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+main a,footer a {
+    color: black;
+}
+main a:hover,footer a:hover{
+    background-color: darkgoldenrod;
+}
+header a {
+    color:brown;
+}
+header {
+    background-color:chartreuse;
+    color: black;
+}
+/*
+header a:hover {
+    background-color: black;
+    color:brown;
+}
+*/
+header li:hover {
+    background-color: blue;
+}
+
+/* h1 {
+    background-color: blueviolet;
+    color: chocolate;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+} */
+.LOGO {
+    background-color: blueviolet;
+    color: chocolate;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}
+button {
+    padding: 5px 12px;
+    color: brown;
+    background-color:coral;
+    text-align: center;
+}
+
+.Hero {
+    background-color:aqua;
+    padding: 20px;
+}
+input, textarea {
+    background-color: rgb(153, 174, 202);
+    color: black;
+}
+input:hover, textarea:hover {
+background-color: cadetblue;
+}
+.btn{
+    height: 40px;
+}
+button:hover {
+    background-color: brown;
+    color: black;
+    box-sizing: border-box;
+    /* font-size: 100%; */
+    padding: 10px;
+
+}
+button:focus {
+    background-color: aqua;
+    color:blue;
+}
+
+footer [data-mingion] {
+    background-color: blue;
+}
+footer {
+    background-color: brown;
+}
+footer li.red ~ li:hover {
+    background-color: blueviolet;
+}
+
+.Hero a:nth-child(3) {
+    background-color: black;
+    color:azure
+}
+.Hero a:nth-child(3):hover {
+    background-color: azure;
+    color: black;
+}
