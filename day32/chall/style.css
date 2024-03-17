@@ -98,3 +98,6 @@ footer {
     background-color: azure;
     color: black;
 }
+header input:focus {
+    background-color: darkkhaki;
+}
