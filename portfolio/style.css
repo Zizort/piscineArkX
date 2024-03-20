@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Google Sans Regular";
+    box-sizing: border-box;
+}
+body {
+    background: white;
+    /* min-height: 100vh; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
+    padding-top: 80px;
+    /* overflow: scroll; */
+    
+}
+main {
+    /* min-width: 100vh; */
+    /* display: flex; */
+    min-height: calc(100vh - 95px);
+    /* margin-bottom: 50px; */
+
+}
+.home {
+    background-color: black;
+}
+h1{
+    color: white;
+}
+header {
+    width: 100%;
+    height: 80px;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    position: fixed;
+    top: 0;
+
+}
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+.hamburger {
+    display: none;
+
+}
+/*display the list elements next to each other*/
+.nav-bar ul {
+    display: flex;
+}
+.nav-bar ul li a {
+    display: block;
+    color: white;
+    font-size: 20px;
+    padding: 10px 25px;
+    border-radius: 50px;
+    transition: 0.2s;
+    margin: 0 5px;
+}
+.nav-bar ul li a:hover {
+    color: black;
+    background-color: white;
+    
+}
+.nav-bar ul li a.active {
+    color: black;
+    background-color: white;
+}
+/*responsive*/
+@media only screen and (max-width: 1320px) {
+    header {
+        padding: 0 50px;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    header {
+        padding: 0 30px;
+    }
+}
+/*header if the screen size is too small*/
+@media only screen and (max-width: 900px) {
+    /*forming the lines*/
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+    /*forming the lines*/
+    .hamburger .line {
+        width: 30px;
+        height: 3px;
+        background: white;
+        margin: 6px 0;
+    }
+    /*moving and changing the nav-bar to its new position*/
+    .nav-bar {
+        /* display: none; we dont want to hide it */
+        /*height to 0 because we only show it when the butto is clicked*/
+        height: 0;/*350px*/
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        background: black;
+        transform: 0.5s;
+        overflow: hidden;
+    }
+    .nav-bar.active {
+        /* height: 350px; */
+        height: auto;
+        opacity: 1;
+    }
+    .nav-bar ul {
+        display: block;
+        width: fit-content;
+        margin: 80px auto 0 auto;
+        text-align: center;
+        transition: 0.5s;
+        /*add opacity and make it 0 to hide it*/
+        opacity: 0;
+    }
+    /*make it visible*/
+    .nav-bar.active ul {
+        opacity: 1;
+    }
+    /*add space between the menu options*/
+    .nav-bar ul li a {
+        margin-bottom: 12px;
+    }
+}
+/*footer styling-----------------------------------------------*/
+footer {
+    background-color: black;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* margin-top: auto; */
+    z-index: 9999;
+}
+.footerContainer {
+    width: 100%;
+    padding: 70px 30px 20px;
+}
+/*icons*/
+.socialIcons {
+    display: flex;
+    /* align-items: center;
+    justify-content: space-between; */
+    justify-content: center;
+    /* justify-content: space-between; */
+}
+.socialIcons a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 50%;
+}
+.socialIcons a i {
+    font-size: 2em;
+    color: black;
+    opacity: 0.9;
+}
+.socialIcons a:hover {
+    background-color: black;
+    transition: 0.5s;
+
+}
+.socialIcons a:hover i {
+    color: white;
+    transition: 0.5s;
+}
+/*navbar*/
+.footer-bar {
+    margin: 30px 0;
+}
+.footer-bar ul {
+    /*display onenext to each other*/
+    display: flex;
+    justify-content: center;
+    list-style-type: nonedisc;/*what?*/
+}
+.footer-bar ul li a {
+    color: white;
+    margin: 20px;
+    text-decoration: none;
+    font-size: 1.3em;
+    opacity: 0.7;
+    transition: 0.5s;/*why?*/
+}
+.footer-bar ul li a:hover {
+    opacity: 1;/*opacity trick to iluminate the element*/
+}
+.footer-bottom {
+    background-color: orangered;
+    padding: 20px;
+    text-align: center;
+}
+.footer-bottom p {
+    color: white;
+}
+.designer {
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin: 0px 5px;
+}
+
+@media only screen and (max-width: 900px) {
+    .footer-bar ul {
+        flex-direction: column;
+    }
+    .footer-bar ul li {
+        width: 100%;
+        text-align: center;
+        margin: 10px;
+
+    }
+}
+
+
