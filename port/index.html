@@ -1,5 +1,5 @@
 <html lang="en">
-<!-- add scroll to top button and download cv  and change style and color of buttons-->
+<!-- add download cv  and change style and color of buttons-->
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,6 +13,19 @@
 </head>
 
 <body>
+    <div class="topbtn" onclick="scrollToTop()"></div>
+    <script type="text/javascript">
+        window.addEventListener('scroll', function() {
+            const scroll = document.querySelector(".topbtn");
+            scroll.classList.toggle("active", window.scrollY > 300);
+        })
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            })
+        }
+    </script>
   <header class="header">
     <nav class="navbar">
       <div class="navbar-container container">
@@ -21,8 +34,9 @@
         </div>
         <ul class="menu-items">
           <li><a href="#about">About</a></li>
-          <li><a href="#my-works">Portfolio</a></li>
+          <li><a href="#my-works">Certs</a></li>
           <li><a href="#contact-me">Contact</a></li>
+          <li><a href="">download CV</a></li>
         </ul>
       </div>
     </nav>
@@ -51,7 +65,7 @@
           </p>
           <div class="work-arrow">
             <p>
-              <a href="#my-works">Check out my work <i class="fas fa-arrow-down"></i></a>
+              <a href="#my-works">Check out my acheivments <i class="fas fa-arrow-down"></i></a>
             </p>
           </div>
         </div>

@@ -20,7 +20,30 @@ header {
   width: 90%;
   margin: auto;
 }
-
+/* ///// top button ------///////*/
+.topbtn {
+  position: fixed;
+  bottom: 800px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background: rgb(245, 241, 6) url(up.png);
+  /* background-color: #0088a9; */
+  border-radius: 50%;
+  background-size: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  z-index: 100000;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+}
+.topbtn.active {
+  bottom: 50px;
+  visibility: visible;
+  opacity: 1;
+}
 /* ////........Navbar.......//// */
 
 .navbar {
