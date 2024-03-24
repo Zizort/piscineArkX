@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');// font end app will be in local host 3000 thats why we need cors
-const { hashSync, compareSync } = require('bcrypt');// for password encryption
+const { hashSync, compareSync, hash } = require('bcrypt');// for password encryption
 const UserModel = require('./config/database');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -14,29 +14,31 @@ app.use(passport.initialize());
 
 require('./config/passport')
 
-app.post('/register', (req, res) => {
-    const user = new UserModel({
-        username: req.body.username,
-        password: hashSync(req.body.password, 10)
-    })
-
-    user.save().then(user => {
-        res.send({
-            success: true,
-            message: "User created successfully.",
-            user: {
-                id: user._id,
-                username: user.username
-            }
+app.post('/register', async (req, res) => {
+    try {
+        const user = new UserModel({
+            username: req.body.username,
+            password: await hash(req.body.password, 10)
         })
-    }).catch(err => {
+
+        await user.save();
+            
+            res.send({
+                success: true,
+                message: "User created successfully.",
+                user: {
+                    id: user._id,
+                    username: user.username
+                }})
+    }
+    catch(err) {
         res.send({
             success: false,
             message: "Something went wrong",
             error: err
         })
-    })
-})
+    }
+});
 
 app.post('/login', (req, res) => {
     UserModel.findOne({ username: req.body.username }).then(user => {
