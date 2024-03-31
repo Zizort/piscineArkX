@@ -22,7 +22,7 @@ export const signup = async (req, res, next) => {
         });
     
         await newUser.save();
-        res.json('sign up successful');
+        res.json('sign up successful');//this needs to change to include succes = true or false
     } catch (err) {
         // res.status(500).json({message: err.message});
         next(err);
