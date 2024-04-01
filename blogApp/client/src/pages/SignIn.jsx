@@ -13,7 +13,7 @@ export default function SignIn() {
   // const [loading, setLoading] = useState(false);
 
   // using redux instead of usestate
-  const {loading, error: errorMessage} = useSelector(state => state.user)
+  const {loading, error: errorMessage} = useSelector((state) => state.user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
